@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include
 from django.conf.urls.static import static
+from main.views import SendEmailView
 
 from main.views import IndexPageView, ChangeLanguageView
 
@@ -14,6 +15,8 @@ urlpatterns = [
     path('language/', ChangeLanguageView.as_view(), name='change_language'),
 
     path('accounts/', include('accounts.urls')),
+    path('send-email/', SendEmailView.as_view(), name='send_email'),
+    
 ]
 
 if settings.DEBUG:

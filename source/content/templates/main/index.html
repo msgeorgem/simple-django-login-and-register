@@ -11,6 +11,10 @@
     {% else %}
 
         {% trans 'You are a guest.' %}
+        <form method="get" action="{% url 'send_email' %}">
+            <button type="submit">Send Email</button>
+        </form>
+        
 
     {% endif %}
 

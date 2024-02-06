@@ -1,6 +1,7 @@
 from os.path import dirname, abspath, join
 
 from django.utils.translation import gettext_lazy as _
+from ..secrets import EMAIL_HOST_USER_,EMAIL_HOST_PASSWORD_,DEFAULT_FROM_EMAIL_
 
 BASE_DIR = dirname(dirname(dirname(dirname(abspath(__file__)))))
 CONTENT_DIR = join(BASE_DIR, 'content')
@@ -14,6 +15,10 @@ ALLOWED_HOSTS = [
 
 SITE_ID = 1
 
+bootstrap4 = {
+    'include_jquery':True,     
+}
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -22,12 +27,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Vendor apps
-    'bootstrap4',
+
 
     # Application apps
     'main',
     'accounts',
+
+    # Vendor apps
+    #'bootstrap4',
+   # 'django-bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -64,14 +72,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'app.wsgi.application'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_FILE_PATH = join(CONTENT_DIR, 'tmp/emails')
+EMAIL_HOST = 'smtp.emaillabs.net.pl'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = EMAIL_HOST_USER_ 
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD_
+DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL_
 
-EMAIL_HOST = ''
-EMAIL_HOST_USER = ''
-DEFAULT_FROM_EMAIL = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_PORT = 465
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
 
 DATABASES = {
     'default': {

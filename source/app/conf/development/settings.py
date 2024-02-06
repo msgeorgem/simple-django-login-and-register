@@ -2,6 +2,7 @@ import warnings
 from os.path import dirname, abspath, join
 
 from django.utils.translation import gettext_lazy as _
+from ..secrets import EMAIL_HOST_USER_,EMAIL_HOST_PASSWORD_,DEFAULT_FROM_EMAIL_
 
 warnings.simplefilter('error', DeprecationWarning)
 
@@ -15,6 +16,10 @@ ALLOWED_HOSTS = []
 
 SITE_ID = 1
 
+bootstrap4 = {
+    'include_jquery':True,     
+}
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -24,12 +29,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     
-    # Vendor apps
-    'bootstrap4',
-
     # Application apps
     'main',
     'accounts',
+
+    # Vendor apps
+    #'bootstrap5',
+    #'django-bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -65,10 +71,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'app.wsgi.application'
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = join(CONTENT_DIR, 'tmp/emails')
-EMAIL_HOST_USER = 'test@example.com'
-DEFAULT_FROM_EMAIL = 'test@example.com'
 
 DATABASES = {
     'default': {
@@ -137,3 +139,12 @@ LOCALE_PATHS = [
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_FILE_PATH = join(CONTENT_DIR, 'tmp/emails')
+EMAIL_HOST = 'smtp.emaillabs.net.pl'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = EMAIL_HOST_USER_ 
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD_
+DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL_
